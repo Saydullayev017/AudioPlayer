@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>audio player</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-music"></i> AudioPlayer</h1>
+            <button class="upload-btn" id="uploadBtn">
+                <i class="fas fa-plus"></i> Add Track
+            </button>
+            <input type="file" id="fileInput" accept="audio/*" style="display: none;">
+        </header>
+        
+        <div class="player-section">
+            <div class="album-art">
+                <i class="fas fa-music"></i>
+                <img id="albumImage" src="" alt="Обложка альбома">
+            </div>
+            
+            <div class="track-info">
+                <div class="track-title" id="currentTrackTitle">Select a track</div>
+                <div class="track-artist" id="currentTrackArtist">—</div>
+            </div>
+            
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="time-info">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">0:00</span>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn" id="prevBtn">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="control-btn play-btn" id="playBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="control-btn" id="nextBtn">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+            </div>
+            
+        <div class="tracks-section">
+            <div class="section-title">
+                <span>Playlist</span>
+                <span id="trackCount">0 tracks</span>
+            </div>
+            <div class="tracks-list" id="tracksList">
+                <!-- Треки будут загружаться сюда -->
+                <div class="track-item empty">
+                    <i class="fas fa-music"></i>
+                    <div class="track-info-small">
+                        <div class="track-title-small">No added tracks</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+    <script src="main.js"></script>
+</body>
+</html>
