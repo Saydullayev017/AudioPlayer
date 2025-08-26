@@ -12,7 +12,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
 }
 
 .container {
@@ -20,7 +19,6 @@ body {
     max-width: 500px;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
-    border-radius: 25px;
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     padding: 25px;
@@ -266,7 +264,6 @@ h1 {
 @media (max-width: 500px) {
     .container {
         padding: 15px;
-        border-radius: 20px;
     }
     
     .album-art {
