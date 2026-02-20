@@ -1,71 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <title>audio player</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AudioPlayer">
+    <meta name="description" content="Современный веб-аудиоплеер с загрузкой и управлением музыкой">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23111' stroke='%23fff' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Cline x1='50' y1='50' x2='50' y2='20' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%230a0a0a'/%3E%3Ccircle cx='90' cy='90' r='60' fill='none' stroke='%23fff' stroke-width='8'/%3E%3Ccircle cx='90' cy='90' r='25' fill='none' stroke='%23fff' stroke-width='8'/%3E%3Cline x1='90' y1='90' x2='90' y2='45' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>AudioPlayer — Минималистичный музыкальный плеер</title>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-music"></i> AudioPlayer</h1>
-            <button class="upload-btn" id="uploadBtn">
-                <i class="fas fa-plus"></i> Add Track
-            </button>
-            <input type="file" id="fileInput" accept="audio/*" style="display: none;">
+    <div class="app" id="app">
+        <header class="header">
+            <div class="header__brand">
+                <div class="header__logo">
+                    <i class="fas fa-compact-disc"></i>
+                </div>
+                <h1 class="header__title">AudioPlayer</h1>
+            </div>
+            <label class="btn btn--upload" for="fileInput" aria-label="Добавить трек">
+                <i class="fas fa-plus"></i>
+                <span>Добавить</span>
+            </label>
+            <input type="file" id="fileInput" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.flac" aria-label="Загрузка аудиофайлов">
         </header>
-        
-        <div class="player-section">
-            <div class="album-art">
-                <i class="fas fa-music"></i>
-                <img id="albumImage" src="" alt="Обложка альбома">
-            </div>
-            
-            <div class="track-info">
-                <div class="track-title" id="currentTrackTitle">Select a track</div>
-                <div class="track-artist" id="currentTrackArtist">—</div>
-            </div>
-            
-            <div class="progress-container" id="progressContainer">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <div class="time-info">
-                <span id="currentTime">0:00</span>
-                <span id="totalTime">0:00</span>
-            </div>
-            
-            <div class="controls">
-                <button class="control-btn" id="prevBtn">
-                    <i class="fas fa-step-backward"></i>
-                </button>
-                <button class="control-btn play-btn" id="playBtn">
-                    <i class="fas fa-play"></i>
-                </button>
-                <button class="control-btn" id="nextBtn">
-                    <i class="fas fa-step-forward"></i>
-                </button>
-            </div>
-            
-        <div class="tracks-section">
-            <div class="section-title">
-                <span>Playlist</span>
-                <span id="trackCount">0 tracks</span>
-            </div>
-            <div class="tracks-list" id="tracksList">
-                <!-- Треки будут загружаться сюда -->
-                <div class="track-item empty">
-                    <i class="fas fa-music"></i>
-                    <div class="track-info-small">
-                        <div class="track-title-small">No added tracks</div>
+
+        <main class="main">
+            <section class="player">
+                <div class="player__visualizer">
+                    <canvas id="visualizer" aria-label="Визуализация аудио"></canvas>
+                </div>
+
+                <div class="player__art">
+                    <div class="player__art-inner" id="albumArt">
+                        <i class="fas fa-music"></i>
                     </div>
                 </div>
-            </div>
+
+                <div class="player__info">
+                    <h2 class="player__title" id="currentTrackTitle">Выберите трек</h2>
+                    <p class="player__artist" id="currentTrackArtist">—</p>
+                </div>
+
+                <div class="player__progress">
+                    <span class="player__time" id="currentTime">0:00</span>
+                    <div class="player__progress-bar" id="progressContainer" role="slider" aria-label="Прогресс воспроизведения" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                        <div class="player__progress-fill" id="progressBar"></div>
+                        <div class="player__progress-thumb"></div>
+                    </div>
+                    <span class="player__time" id="totalTime">0:00</span>
+                </div>
+
+                <div class="player__controls">
+                    <button class="btn btn--icon btn--shuffle" id="shuffleBtn" aria-label="Перемешивание">
+                        <i class="fas fa-shuffle"></i>
+                    </button>
+                    <button class="btn btn--icon" id="prevBtn" aria-label="Предыдущий трек">
+                        <i class="fas fa-backward-step"></i>
+                    </button>
+                    <button class="btn btn--play" id="playBtn" aria-label="Воспроизведение">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="btn btn--icon" id="nextBtn" aria-label="Следующий трек">
+                        <i class="fas fa-forward-step"></i>
+                    </button>
+                    <button class="btn btn--icon btn--repeat" id="repeatBtn" aria-label="Повтор">
+                        <i class="fas fa-repeat"></i>
+                    </button>
+                </div>
+
+                <div class="player__volume">
+                    <button class="btn btn--icon btn--volume" id="volumeBtn" aria-label="Громкость">
+                        <i class="fas fa-volume-high"></i>
+                    </button>
+                    <div class="player__volume-bar" id="volumeContainer" role="slider" aria-label="Громкость" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" tabindex="0">
+                        <div class="player__volume-fill" id="volumeBar"></div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="playlist" id="playlist">
+                <div class="playlist__header">
+                    <h3 class="playlist__title">Плейлист</h3>
+                    <span class="playlist__count" id="trackCount">0 треков</span>
+                </div>
+                <div class="playlist__list" id="tracksList" role="list" aria-label="Список треков">
+                    <div class="playlist__empty">
+                        <i class="fas fa-music"></i>
+                        <p>Добавьте треки для начала</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Javlonbek Saydullaev</p>
+        </footer>
+    </div>
+
+    <div class="drop-zone" id="dropZone">
+        <div class="drop-zone__content">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Перетащите аудиофайлы сюда</p>
+            <p class="drop-zone__hint">или нажмите "Добавить" вверху</p>
         </div>
     </div>
 
-    <audio id="audioPlayer"></audio>
-    <script src="main.js"></script>
+    <audio id="audioPlayer" preload="metadata" playsinline webkit-playsinline></audio>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

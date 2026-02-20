@@ -1,0 +1,17 @@
+{
+    "name": "AudioPlayer",
+    "short_name": "AudioPlayer",
+    "description": "Современный веб-аудиоплеер",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#0a0a0a",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%230a0a0a'/%3E%3Ccircle cx='90' cy='90' r='60' fill='none' stroke='%23fff' stroke-width='8'/%3E%3Ccircle cx='90' cy='90' r='25' fill='none' stroke='%23fff' stroke-width='8'/%3E%3Cline x1='90' y1='90' x2='90' y2='45' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E",
+            "sizes": "180x180",
+            "type": "image/svg+xml"
+        }
+    ]
+}
