@@ -17,6 +17,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>AudioPlayer — Минималистичный музыкальный плеер</title>
+    <script>
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.setActionHandler('play', () => {
+                document.getElementById('audioPlayer').play();
+            });
+            navigator.mediaSession.setActionHandler('pause', () => {
+                document.getElementById('audioPlayer').pause();
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="app" id="app">
@@ -115,7 +125,9 @@
         </div>
     </div>
 
-    <audio id="audioPlayer" preload="metadata" playsinline webkit-playsinline></audio>
+    <video id="videoHelper" preload="auto" playsinline webkit-playsinline muted loop style="position:absolute;width:1px;height:1px;pointer-events:none;opacity:0;" aria-hidden="true"></video>
+    <audio id="bgAudioPlayer" preload="none" playsinline webkit-playsinline style="display:none;"></audio>
+    <audio id="audioPlayer" preload="metadata" playsinline webkit-playsinline allow="autoplay"></audio>
     <script src="assets/js/main.js"></script>
 </body>
 </html>

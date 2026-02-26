@@ -7,13 +7,16 @@ A modern web audio player with the ability to upload and manage your personal mu
 ---
 #### Key Features
 
-*   **Upload Tracks**: Add audio files (mp3, wav, ogg, etc.) directly from your device.
+*   **Upload Tracks**: Add audio files (mp3, wav, ogg, m4a, aac, flac) directly from your device.
+*   **Folder Upload**: Upload entire folders with multiple audio files at once.
 *   **Local Storage**: All tracks are securely stored in your browser using IndexedDB.
-*   **Playlist Management**: View, play, and delete tracks from your playlist.
-*   **Full Playback Controls**: Play/Pause, Next, Previous.
+*   **Playlist Management**: Create, delete, and switch between multiple playlists.
+*   **Full Playback Controls**: Play/Pause, Next, Previous, Shuffle, Repeat modes.
 *   **Intuitive Progress Bar**: Seek through the track by clicking on the progress bar.
 *   **Visual Feedback**: Animated album art and highlighting for the current track.
 *   **Responsive Design**: Looks great on both desktop and mobile devices (iPhone, Android).
+*   **iOS Support**: Background playback support for iPhone/iPad.
+*   **Media Session API**: Control playback from system media controls and lock screen.
 *   **Track Info**: Displays track title, artist, and duration.
 
 ---
@@ -41,8 +44,13 @@ That's it! Your track will upload, be saved in the browser, and will be ready to
 audio-player/
 │
 ├── index.html          # Main HTML file
-├── style.css           # Application styles
-└── main.js             # Core application logic (JavaScript)
+├── assets/
+│   ├── css/
+│   │   └── style.css   # Application styles
+│   └── js/
+│       └── main.js     # Core application logic (JavaScript)
+├── license.txt         # License file
+└── README.md           # Project documentation
 ```
 
 ---
@@ -84,11 +92,9 @@ The app works best in modern browsers that support:
 #### Potential Improvements
 
 *   Add the ability to edit metadata (title, artist) for uploaded tracks.
-*   Create multiple playlists.
 *   Implement Drag & Drop for uploading tracks.
-*   Add an audio visualizer.
 *   Support for hotkeys (spacebar for play/pause, arrows for seeking).
-*   Add a volume control slider.
+*   Add search functionality.
 
 ---
 #### License
